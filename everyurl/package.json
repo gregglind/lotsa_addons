@@ -1,0 +1,9 @@
+{
+  "name": "everyurl",
+  "fullName": "everyurl",
+  "description": "a basic add-on",
+  "author": "Gregg Lind <glind@mozilla.com>",
+  "id":  "everyurl@uxr.mozilla.com",
+  "license": "MPL 2.0",
+  "version": "0.1"
+}
