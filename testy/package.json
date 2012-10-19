@@ -1,0 +1,9 @@
+{
+  "name": "testy",
+  "fullName": "testy",
+  "description": "a basic add-on",
+  "author": "",
+  "id": "testy@fakeyfakey.com",
+  "license": "MPL 2.0",
+  "version": "0.1"
+}
