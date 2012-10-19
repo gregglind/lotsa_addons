@@ -3,7 +3,7 @@ Short instructions for coverage:
 
 ```
 npm install git://github.com/gregglind/esprima.git#moz  # moz aware esprima
-npm install git://github.com/gregglind/CoverJS.git#scope  # fixed from coverjs
+npm install -g  git://github.com/gregglind/CoverJS.git#scope  # fixed from coverjs, install to bin
 npm install escodegen
 ```
 
