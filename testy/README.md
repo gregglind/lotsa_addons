@@ -18,10 +18,17 @@ Then, from inside the addon directory you are interested in testing:
 2.
 
     ```
-    rm -rf fakey && mkdir -p fakey/lib && cp -r data doc test package.json fakey && coverjs -o fakey/lib `find lib -name '*js'`
+    rm -rf fakey && mkdir -p fakey/lib && cp -r data doc test package.json fakey && CoverJS -o fakey/lib `find lib -name '*js'`
     ( cfx test --pkgdir=fakey  ) 2>&1 | less
     node coveritall.js  > coverage.html
     open coverage.html
     ```
+
+Details and big ideas / checks of correctness
+-----------------------------------------------
+
+1. ```fakey/lib/*js``` should have calls to `__$coverObject` in them.
+2. `cfx run` should run normally.
+3. `cfx test --pkgdir=fakey ` should make a `~/test@....coverage.json` file
 
 
