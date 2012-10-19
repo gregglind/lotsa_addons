@@ -2,8 +2,8 @@ Short instructions for coverage:
 ===================================
 
 ```
-npm install esprima-moz
-npm install coverjs
+npm install git://github.com/gregglind/esprima.git#moz  # moz aware esprima
+npm install git://github.com/gregglind/CoverJS.git#scope  # fixed from coverjs
 npm install escodegen
 ```
 
