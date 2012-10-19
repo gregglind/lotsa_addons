@@ -11,3 +11,8 @@ rm -rf fakey && mkdir -p fakey/lib && cp -r data doc test package.json fakey && 
 node coveritall.js  > coverage.html
 open coverage.html
 ```
+
+
+Also, you will need to patch your Addon-SDK, or follow   gregglind/addon-sdk#coverage
+
+https://github.com/mozilla/addon-sdk/pull/624
