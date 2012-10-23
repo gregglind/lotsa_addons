@@ -1,34 +1,42 @@
-Short instructions for coverage:
+Coverage in Your Addon-SDK Addon!
 ===================================
 
+1. Get `CoverJS`, `esprima`, `escodegen`
+
 ```
-npm install git://github.com/gregglind/esprima.git#moz  # moz aware esprima
-npm install -g  git://github.com/gregglind/CoverJS.git#scope  # fixed from coverjs, install to bin
-npm install escodegen
+npm install git://github.com/gregglind/CoverJS.git#moz  # installs moz-aware dependencies [1]
+
 ```
 
-You will need to patch your Addon-SDK, or follow   `gregglind/addon-sdk#coverage`
-
-   https://github.com/mozilla/addon-sdk/pull/624
+2.  Patch your Addon-SDK (https://github.com/mozilla/addon-sdk/pull/624), or follow   `git://github.com/gregglind/addon-sdk#coverage`
 
 
-Then, from inside the addon directory you are interested in testing:
-
-1.  symlink in the CoverJS directory  (because it is used by `coveritall.js`)
-2.
+3. From the addon directory you are interested in testing.
 
     ```
-    rm -rf fakey && mkdir -p fakey/lib && cp -r data doc test package.json fakey && CoverJS -o fakey/lib `find lib -name '*js'`
+    rm -rf fakey && mkdir -p fakey/lib && cp -r data doc test package.json fakey && \
+    ./node_modules/coverjs-moz/bin/coverjs -o fakey/lib \
+    --escodegen-options '{"moz":{"starlessGenerator":true,"parenthesizedComprehensionBlock":true}}' \
+    `find lib -name '*js'`
     ( cfx test --pkgdir=fakey  ) 2>&1 | less
     node coveritall.js  > coverage.html
     open coverage.html
     ```
+
 
 Details and big ideas / checks of correctness
 -----------------------------------------------
 
 1. ```fakey/lib/*js``` should have calls to `__$coverObject` in them.
 2. `cfx run` should run normally.
-3. `cfx test --pkgdir=fakey ` should make a `~/test@....coverage.json` file
+3. `cfx test --pkgdir=fakey ` should make a `~/test@....coverage.json` file.
 
 
+Notes:
+--------
+
+[1]
+```
+npm install git://github.com/gregglind/esprima.git#moz  # moz aware esprima
+npm install git://github.com/Constellation/escodegen.git  # mainline allows moz stuff.  npm version
+```
