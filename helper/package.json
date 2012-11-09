@@ -1,0 +1,9 @@
+{
+  "name": "helper",
+  "fullName": "helper",
+  "description": "Generic, robust 'helper' for loading prefs, pages from --static-args",
+  "author": "Gregg Lind <glind@mozilla.com",
+  "license": "MPL 2.0",
+  "id":  "helper@ux.mozilla.org",
+  "version": "0.1"
+}
