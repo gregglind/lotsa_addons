@@ -1,9 +1,9 @@
 {
   "name": "feedback",
   "fullName": "feedback",
-  "id": "jid1-SNZtK6mCrR6oRg",
+  "id": "feedback-variation@ux.mozilla.com",
   "description": "a basic add-on",
-  "author": "",
+  "author": "Gregg Lind <glind@mozilla.com",
   "license": "MPL 2.0",
   "version": "0.1"
 }
