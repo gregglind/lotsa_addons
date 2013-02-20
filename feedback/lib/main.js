@@ -87,15 +87,13 @@ function twopartfb(window){
 	n.setAttribute("label","feedback")
   //n.classList.add("toolbarbutton-1")
 	//n.classList.add("feedbackbutton");
-  let n1 = document.createElement("toolbarbutton");
+  let n1= document.createElement("toolbarbutton");
   let n2 = document.createElement("toolbarbutton");
-  n.setAttribute("image",data.url("feedback-faces-win.png"));
 
   [n1,n2].forEach(function(l){
 		l.setAttribute("type","button");
     l.classList.add("toolbarbutton-1")
     l.classList.add("feedbackbutton-twopart")
-    l.classList.add("feedbackbutton-2")
     //l.setAttribute("image",data.url("feedback-faces-win.png"));
   })
 
@@ -105,8 +103,8 @@ function twopartfb(window){
   n2.addEventListener("click",function(evt){
   	require('tabs').open("people.mozilla.com/~glind#sad")
   })
-  n1.setAttribute("label",":)");
-  n2.setAttribute("label",":<");
+  //n1.setAttribute("label",":)");
+  //sn2.setAttribute("label",":<");
   n1.id = "feedbackbutton-happy";
   n2.id = "feedbackbutton-sad";
 
