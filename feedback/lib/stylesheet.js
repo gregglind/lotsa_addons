@@ -9,11 +9,15 @@
  TODO (glind)  urls.
  */
 
+/**
+  *
+  */
+
 const {Cc, Ci, Cu} = require("chrome");
 
 const sss = exports.sss = Cc["@mozilla.org/content/style-sheet-service;1"]
                     .getService(Ci.nsIStyleSheetService);
-const ios = epxorts.ios = Cc["@mozilla.org/network/io-service;1"]
+const ios = exports.ios = Cc["@mozilla.org/network/io-service;1"]
                     .getService(Ci.nsIIOService);
 
 let cascadeLevels = {
@@ -21,10 +25,15 @@ let cascadeLevels = {
 	"user":  sss.USER_SHEET
 };
 
-const register = exports.register = function(urlstring,cascade){
+function urlify(urlstring_or_url){
+  let u= urlstring_or_url;
+  return (typeof u === typeof "a")? ios.newURI(u,null,null) : u
+}
+
+const register = exports.register = function(url,cascade){
 	cascade = cascade || "user";
 	cascade = cascadeLevels[cascade];
-	var aURL = ios.newURI(urlstring, null, null);
+	let aURL = urlify(url)
   if(!isRegistered(aURL))
     sss.loadAndRegisterSheet(aURL, cascade);
 
@@ -34,19 +43,19 @@ const register = exports.register = function(urlstring,cascade){
   })
 }
 
-exports.unregister = function unregister(urlstring,cascade) {
+exports.unregister = function unregister(url,cascade) {
   cascade = cascade || "user";
   cascade = cascadeLevels[cascade];
-  var aURL = ios.newURI(urlstring, null, null);
+  let aURL = urlify(url)
   if(isRegistered(aURL,cascade)) {
     sss.unregisterSheet(aURL, cascade);
   }
 }
 
-function isRegistered(urlstring,cascade) {
+const isRegistered = exports.isRegistered = function(url,cascade) {
   cascade = cascade || "user";
   cascade = cascadeLevels[cascade];
-  var aURL = ios.newURI(urlstring, null, null);
+  let aURL = urlify(url)
   return sss.sheetRegistered(aURL, cascade);
 }
 

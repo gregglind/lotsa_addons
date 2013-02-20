@@ -1,0 +1,20 @@
+/* License:  MPL 2.0 */
+
+/* http://dxr.mozilla.org/mozilla-central/widget/tests/test_platform_colors.xul.html */
+/* https://developer.mozilla.org/en-US/docs/CSS/color_value */
+.feedbackbutton {
+  -moz-box-orient: horizontal !important;  /* helps with vertical centering */
+}
+
+.feedbackbutton .toolbarbutton-icon {
+    display: none;  /* no icon, when on the bar, xbl */
+}
+
+
+.feedbackbutton .toolbarbutton-text {
+  display: -moz-box;
+  margin: 0;  /* helps with centering */
+  /*color: -moz-dialogtext;
+  text-shadow: none;*/
+}
+
