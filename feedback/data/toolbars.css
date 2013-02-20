@@ -18,3 +18,27 @@
   text-shadow: none;*/
 }
 
+
+.feedbackbutton-twopart .toolbarbutton-text {
+    display: none;  /* no text, when on the bar, xbl */
+}
+
+.feedbackbutton-twopart .toolbarbutton-icon {
+    /*display: none;  /* no text, when on the bar, xbl */
+}
+
+.feedbackbutton-twopart {
+	list-style-image: url("chrome://browser/skin/reload-stop-go@2x.png");
+};
+
+#feedbackbutton-happy {
+  margin-right: 0 !important;
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+#feedbackbutton-sad {
+  margin-left: 0 !important;
+  -moz-image-region: rect(0px, 32px, 16px, 16px);
+
+}
+
