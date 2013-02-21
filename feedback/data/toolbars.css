@@ -1,7 +1,7 @@
 /* License:  MPL 2.0 */
 
 
-/*@-moz-document url-prefix("chrome://") {*/
+@-moz-document url-prefix("chrome://") {
 
 
 /*
@@ -26,6 +26,7 @@
 
 /* http://dxr.mozilla.org/mozilla-central/widget/tests/test_platform_colors.xul.html */
 /* https://developer.mozilla.org/en-US/docs/CSS/color_value */
+
 .feedbackbutton {
   -moz-box-orient: horizontal !important;  /* helps with vertical centering */
 }
@@ -47,46 +48,45 @@
 
 
 
+/*
 .feedbackbutton-twopart .toolbarbutton-text {
   display: none;
-}
+}*/
 
 
 
 /* default sizes */
 
 .feedbackbutton-twopart {
-	list-style-image: url("resource://feedback-variation-at-ux-dot-mozilla-dot-com/feedback/data/feedback-faces-mac.png") !important;
+	list-style-image: url("resource://feedback-variation-at-ux-dot-mozilla-dot-com/feedback/data/feedback-faces-win.png") !important;
+	margin: 0 !important; /* allows the buttons to touch */
 };
 
-#feedbackbutton-happy {
-  margin-right: 0 !important;
+#feedbackbutton2-happy {
   /*-moz-image-region: rect(2px, 20px, 18px, 0px);*/
-  -moz-image-region: rect(2px, 38px, 18px, 20px);
-
+  -moz-image-region: rect(2px, 38px, 18px, 20px) !important;
 }
 
-#feedbackbutton-sad {
-  margin-left: 0 !important;
-  -moz-image-region: rect(2px, 38px, 18px, 20px);
+#feedbackbutton2-sad {
+  -moz-image-region: rect(2px, 38px, 18px, 20px) !important;
 }
 
-/*
+
 @media (min-resolution: 2dppx) {
 	.feedbackbutton-twopart {
 		list-style-image: url("resource://feedback-variation-at-ux-dot-mozilla-dot-com/feedback/data/feedback-faces-2xmac.png") !important;
 	};
 
-	#feedbackbutton-happy {
+	#feedbackbutton2-happy {
 	  margin-right: 0 !important;
 	  -moz-image-region: rect(4px, 40px, 36px, 0px);
 	}
 
-	#feedbackbutton-sad {
+	#feedbackbutton2-sad {
 	  margin-left: 0 !important;
 	  -moz-image-region: rect(4px, 76px, 36px, 40px);
 	}
 } /* end of retina feedback */
 
 
-/*}  /* end of moz-document prefix */
+}  /* end of moz-document prefix */

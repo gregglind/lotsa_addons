@@ -105,12 +105,14 @@ function twopartfb(window){
   	require('tabs').open("people.mozilla.com/~glind#sad")
   })
   //n1.setAttribute("label",":)");
-  //sn2.setAttribute("label",":<");
-  n1.id = "feedbackbutton-happy";
-  n2.id = "feedbackbutton-sad";
+  //n2.setAttribute("label",":<");
+  n1.id = "feedbackbutton2-happy";
+  n2.id = "feedbackbutton2-sad";
+
 
   n.appendChild(n1);
   n.appendChild(n2);
+
 
 	n.setAttribute("tooltiptext","Give Mozilla Feedback at their Page");
 	document.getElementById('nav-bar').appendChild(n)
