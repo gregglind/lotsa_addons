@@ -58,9 +58,9 @@
 /* default sizes */
 
 .feedbackbutton-twopart {
-	list-style-image: url("resource://feedback-variation-at-ux-dot-mozilla-dot-com/feedback/data/feedback-faces-win.png") !important;
+	list-style-image: url("resource://feedback-variation-at-ux-dot-mozilla-dot-com/feedback/data/feedback-faces-mac.png") !important;
 	margin: 0 !important; /* allows the buttons to touch */
-};
+}
 
 #feedbackbutton2-happy {
   /*-moz-image-region: rect(2px, 20px, 18px, 0px);*/
@@ -75,7 +75,7 @@
 @media (min-resolution: 2dppx) {
 	.feedbackbutton-twopart {
 		list-style-image: url("resource://feedback-variation-at-ux-dot-mozilla-dot-com/feedback/data/feedback-faces-2xmac.png") !important;
-	};
+	}
 
 	#feedbackbutton2-happy {
 	  margin-right: 0 !important;

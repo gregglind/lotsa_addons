@@ -35,19 +35,19 @@ const EVENTS = {
   "mouseout": "mouseout",
 };
 
-const { validateOptions } = require("./deprecated/api-utils");
-const panels = require("./panel");
-const { EventEmitter, EventEmitterTrait } = require("./deprecated/events");
-const { Trait } = require("./deprecated/traits");
-const LightTrait = require('./deprecated/light-traits').Trait;
-const { Loader, Symbiont } = require("./content/content");
-const { Cortex } = require('./deprecated/cortex');
-const windowsAPI = require("./windows");
-const { WindowTracker } = require("./deprecated/window-utils");
-const { isBrowser } = require("./window/utils");
-const { setTimeout } = require("./timers");
-const unload = require("./system/unload");
-const { uuid } = require("./util/uuid");
+const { validateOptions } = require("sdk/deprecated/api-utils");
+const panels = require("sdk/panel");
+const { EventEmitter, EventEmitterTrait } = require("sdk/deprecated/events");
+const { Trait } = require("sdk/deprecated/traits");
+const LightTrait = require('sdk/deprecated/light-traits').Trait;
+const { Loader, Symbiont } = require("sdk/content/content");
+const { Cortex } = require('sdk/deprecated/cortex');
+const windowsAPI = require("sdk/windows");
+const { WindowTracker } = require("sdk/deprecated/window-utils");
+const { isBrowser } = require("sdk/window/utils");
+const { setTimeout } = require("sdk/timers");
+const unload = require("sdk/system/unload");
+const { uuid } = require("sdk/util/uuid");
 
 // Data types definition
 const valid = {
@@ -99,7 +99,7 @@ let widgetAttributes = {
 
 // Import data definitions from loader, but don't compose with it as Model
 // functions allow us to recreate easily all Loader code.
-let loaderAttributes = require("./content/loader").validationAttributes;
+let loaderAttributes = require("sdk/content/loader").validationAttributes;
 for (let i in loaderAttributes)
   widgetAttributes[i] = loaderAttributes[i];
 
@@ -352,6 +352,7 @@ const WidgetTrait = LightTrait.compose(EventEmitterTrait, LightTrait({
 // Widget constructor
 const Widget = function Widget(options) {
   let w = WidgetTrait.create(Widget.prototype);
+  console.log("__widg",Object.keys(w));
   w._initWidget(options);
 
   // Return a Cortex of widget in order to hide private attributes like _onEvent
@@ -373,7 +374,7 @@ const WidgetViewTrait = LightTrait.compose(EventEmitterTrait, LightTrait({
 
   // Reference to the matching WidgetChrome
   // set right after constructor call
-  _chrome: null,
+  chrome: null,
 
   // Public interface of the WidgetView, passed in `attach` event or in
   // Widget.getView
@@ -389,9 +390,9 @@ const WidgetViewTrait = LightTrait.compose(EventEmitterTrait, LightTrait({
     let self = this;
     this._port = EventEmitterTrait.create({
       emit: function () {
-        if (!self._chrome)
+        if (!self.chrome)
           throw new Error(ERR_DESTROYED);
-        self._chrome.update(self._baseWidget, "emit", arguments);
+        self.chrome.update(self._baseWidget, "emit", arguments);
       }
     });
     // expose wrapped port, that exposes only public properties.
@@ -415,7 +416,7 @@ const WidgetViewTrait = LightTrait.compose(EventEmitterTrait, LightTrait({
 
     // Forward attributes changes to WidgetChrome instance
     if (['width', 'tooltip', 'content', 'contentURL'].indexOf(name) != -1) {
-      this._chrome.update(this._baseWidget, name, value);
+      this.chrome.update(this._baseWidget, name, value);
     }
   },
 
@@ -437,12 +438,12 @@ const WidgetViewTrait = LightTrait.compose(EventEmitterTrait, LightTrait({
 
   _isInWindow: function WidgetView__isInWindow(window) {
     return windowsAPI.BrowserWindow({
-      window: this._chrome.window
+      window: this.chrome.window
     }) == window;
   },
 
   _isInChromeWindow: function WidgetView__isInChromeWindow(window) {
-    return this._chrome.window == window;
+    return this.chrome.window == window;
   },
 
   _onPortEvent: function WidgetView__onPortEvent(args) {
@@ -458,14 +459,14 @@ const WidgetViewTrait = LightTrait.compose(EventEmitterTrait, LightTrait({
   _port: null,
 
   postMessage: function WidgetView_postMessage(message) {
-    if (!this._chrome)
+    if (!this.chrome)
       throw new Error(ERR_DESTROYED);
-    this._chrome.update(this._baseWidget, "postMessage", message);
+    this.chrome.update(this._baseWidget, "postMessage", message);
   },
 
   destroy: function WidgetView_destroy() {
-    this._chrome.destroy();
-    delete this._chrome;
+    this.chrome.destroy();
+    delete this.chrome;
     this._baseWidget._onViewDestroyed(this);
     this._emit("detach");
   }
@@ -586,7 +587,7 @@ BrowserWindow.prototype = {
       window: this.window
     });
 
-    widget._chrome = item;
+    widget.chrome = item;
 
     this._insertNodeInToolbar(item.node);
 
@@ -704,7 +705,7 @@ WidgetChrome.prototype._createNode = function WC__createNode() {
   // Temporary work around require("self") failing on unit-test execution ...
   let jetpackID = "testID";
   try {
-    jetpackID = require("./self").id;
+    jetpackID = require("sdk/self").id;
   } catch(e) {}
 
   // Compute an unique and stable widget id with jetpack id and widget.id
