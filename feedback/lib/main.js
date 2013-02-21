@@ -1,6 +1,7 @@
 "use strict";
 
 const {data} = require("self")
+console.log(data.url('/'));
 var fivestar = require("sdk/widget").Widget({
   id: "fivestar",
   label: "fivestar widget",
@@ -52,7 +53,7 @@ function insertAfter(referenceNode, newNode) {
 
 // on in the the toolbar, nothing fancy...
 
-require('./stylesheet').register(data.url('toolbars.css'));
+require('./stylesheet').register(data.url('toolbars.css',"author"));
 
 function makeBars(window) {
 	["how are we doing?","complain!","\uD83D\uDC4D \uD83D\uDC4E","feedback"].forEach(function(l){
@@ -87,7 +88,7 @@ function twopartfb(window){
 	n.setAttribute("label","feedback")
   //n.classList.add("toolbarbutton-1")
 	//n.classList.add("feedbackbutton");
-  let n1= document.createElement("toolbarbutton");
+  let n1 = document.createElement("toolbarbutton");
   let n2 = document.createElement("toolbarbutton");
 
   [n1,n2].forEach(function(l){
@@ -119,8 +120,16 @@ function twopartfb(window){
 	})
 }
 
-require("sdk/deprecated/window-utils").WindowTracker({onTrack:  makeBars})
-require("sdk/deprecated/window-utils").WindowTracker({onTrack:  twopartfb})
+const BROWSER = "chrome://browser/content/browser.xul";
+function chromeonly(fn){
+	return function _chromified(window){
+		if (window.location != BROWSER) return true
+		return fn(window)
+	}
+}
+
+//require("sdk/deprecated/window-utils").WindowTracker({onTrack:  chromeonly(makeBars)})
+require("sdk/deprecated/window-utils").WindowTracker({onTrack:  chromeonly(twopartfb)})
 
 
 

@@ -1,5 +1,29 @@
 /* License:  MPL 2.0 */
 
+
+/*@-moz-document url-prefix("chrome://") {*/
+
+
+/*
+15:11 <@John-Galt> They do, just too low precedence.
+15:11 < Mook_as> so, you can register your sheet as an author sheet...
+15:11 < gregglind> Ah, will try then.  I am less worried about the rects.
+15:11 <@John-Galt> You also need a @-moz-document block in that CSS file so it doesn't apply to, e.g., content documents.
+15:12 <@John-Galt> Mook_as: Not with the stylesheet service you can't.
+15:12 < gregglind> stylesheet has two levels, user and agent
+15:12 < gregglind> in the service
+15:13 < gregglind> how are you DOMi'ing this stuff btw?
+15:13 < Mook_as> oh, const unsigned long AUTHOR_SHEET = 2; is new
+15:13 <@John-Galt> Oh. The -sad one works. The -happy doesn't.
+15:13 <@Mossop> Since bug 676054
+15:13 <%firebot> Bug https://bugzilla.mozilla.org/show_bug.cgi?id=676054 enh, P2, mozilla19, gkrizsanits, RESO FIXED, Provide AUTHOR_SHEET type for registering with
+                 nsIStyleSheetService
+15:13 <@John-Galt> Mossop: Oh. When did that land?
+15:13 <@John-Galt> 19 obviously...
+
+15:19 <@John-Galt> You'd need to set -moz-appearance: none !important; to change the margins.
+*/
+
 /* http://dxr.mozilla.org/mozilla-central/widget/tests/test_platform_colors.xul.html */
 /* https://developer.mozilla.org/en-US/docs/CSS/color_value */
 .feedbackbutton {
@@ -21,16 +45,48 @@
 /* two part feedback button */
 
 
-.feedbackbutton-twopart {list-style-image: url("chrome://browser/skin/reload-stop-go@2x.png");};
+
+
+.feedbackbutton-twopart .toolbarbutton-text {
+  display: none;
+}
+
+
+
+/* default sizes */
+
+.feedbackbutton-twopart {
+	list-style-image: url("resource://feedback-variation-at-ux-dot-mozilla-dot-com/feedback/data/feedback-faces-mac.png") !important;
+};
 
 #feedbackbutton-happy {
   margin-right: 0 !important;
-  /*-moz-image-region: rect(0px, 16px, 16px, 0px);*/
+  /*-moz-image-region: rect(2px, 20px, 18px, 0px);*/
+  -moz-image-region: rect(2px, 38px, 18px, 20px);
+
 }
 
 #feedbackbutton-sad {
   margin-left: 0 !important;
-  /*-moz-image-region: rect(0px, 32px, 16px, 16px);*/
-
+  -moz-image-region: rect(2px, 38px, 18px, 20px);
 }
 
+/*
+@media (min-resolution: 2dppx) {
+	.feedbackbutton-twopart {
+		list-style-image: url("resource://feedback-variation-at-ux-dot-mozilla-dot-com/feedback/data/feedback-faces-2xmac.png") !important;
+	};
+
+	#feedbackbutton-happy {
+	  margin-right: 0 !important;
+	  -moz-image-region: rect(4px, 40px, 36px, 0px);
+	}
+
+	#feedbackbutton-sad {
+	  margin-left: 0 !important;
+	  -moz-image-region: rect(4px, 76px, 36px, 40px);
+	}
+} /* end of retina feedback */
+
+
+/*}  /* end of moz-document prefix */

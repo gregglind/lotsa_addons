@@ -22,7 +22,8 @@ const ios = exports.ios = Cc["@mozilla.org/network/io-service;1"]
 
 let cascadeLevels = {
 	"agent": sss.AGENT_SHEET,
-	"user":  sss.USER_SHEET
+	"user":  sss.USER_SHEET,
+  "author":  sss.AUTHOR_SHEET
 };
 
 function urlify(urlstring_or_url){
