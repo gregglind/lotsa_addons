@@ -53,6 +53,9 @@ function insertAfter(referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
+function openpage(url){
+  tabs.activeTab.url = url;
+}
 
 const TOOLTIPTEXT = "Go To Mozilla Firefox Feedback Page";
 const URL = "https://input.mozilla.org/feedback?source=feedbackbutton";
@@ -80,7 +83,7 @@ function makeBars(window) {
       n.parentNode.removeChild(n);
     });
     n.addEventListener("click",function(evt){
-      tabs.open(URL);
+      openpage(URL);
     });  });
 }
 
@@ -128,10 +131,10 @@ function twopartfb(window){
   })
 
   n1.addEventListener("click",function(evt){
-    tabs.open(URL+"#happy");
+    openpage(URL+"#happy");
   });
   n2.addEventListener("click",function(evt){
-    tabs.open(URL+"#sad");
+    openpage(URL+"#sad");
   });
   //n1.setAttribute("label",":)");
   //n2.setAttribute("label",":<");
