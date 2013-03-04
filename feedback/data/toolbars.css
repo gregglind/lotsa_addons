@@ -64,7 +64,7 @@
 
 #feedbackbutton2-happy {
   /*-moz-image-region: rect(2px, 20px, 18px, 0px);*/
-  -moz-image-region: rect(2px, 38px, 18px, 20px) !important;
+  -moz-image-region: rect(2px, 20px, 18px, 2px) !important;
 }
 
 #feedbackbutton2-sad {
@@ -79,7 +79,8 @@
 
 	#feedbackbutton2-happy {
 	  margin-right: 0 !important;
-	  -moz-image-region: rect(4px, 40px, 36px, 0px);
+ 	 -moz-image-region: rect(4px, 40px, 36px, 4px) !important;
+
 	}
 
 	#feedbackbutton2-sad {
