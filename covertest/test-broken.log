@@ -1,0 +1,45 @@
+Using binary at '/Applications/Firefox.app/Contents/MacOS/firefox-bin'.
+Using profile at '/var/folders/0z/4g3t_26s3gv835xswsslbn400000gp/T/tmp8JiIyL.mozrunner'.
+2013-04-28 14:33:46.753 firefox-bin[9476:507] invalid drawable
+info: covertest: I AM USING THIS TEST MODULE, SRSLY
+info: covertest: runner 40
+Running tests on Firefox 20.0/Gecko 20.0 ({ec8030f7-c20a-464f-9b0e-13a3a9e97384}) under darwin/x86.
+info: covertest: About to module: sdk/test/harness
+info: covertest: CL sdk/test/harness dump,console,gregg,global
+info: covertest: about to findAndRunTests
+info: covertest: dump,console,gregg,global
+info: covertest: in unit-test f&R
+info: covertest: --> testOutOfProcess,testInProcess,stopOnError,filter,onDone
+info: covertest: suite: string covertest/tests/test-main
+info: covertest: Traceback (most recent call last):
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/timers.js", line 31, in notify
+    callback.apply(null, args);
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/test/runner.js", line 50, in null
+    onDone: onDone
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/test/harness.js", line 599, in runTests
+    nextIteration();
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/test/harness.js", line 421, in nextIteration
+    findAndRunTests(loader, nextIteration);
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/test/runner.js", line 88, in findAndRunTests
+    onDone: nextIteration
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/deprecated/unit-test.js", line 27, in findAndRunTests
+    function (tests) {
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/deprecated/unit-test-finder.js", line 55, in findTests
+    function(suite) {
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/deprecated/unit-test-finder.js", line 60, in null
+    var loader = Loader(module);
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/test/loader.js", line 15, in CustomLoader
+    if (id == "UNK") console.trace()
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/lang/functional.js", line 73, in null
+    return function() fn.apply(this, args.concat(Array.slice(arguments)));
+info: covertest: CL UNK dump,console
+Error: Error: cannot find the global scope
+ Traceback (most recent call last):
+  File "resource://jid1-6mbf14zorstb4w-at-jetpack/covertest/tests/test-main.js", line 1, in
+    var main = require("./main");
+  File "resource://extensions.modules.jid1-6mbf14zorstb4w-at-jetpack.commonjs.path/sdk/loader/cuddlefish.js", line 133, in options<.load
+    result = load(loader, module);
+  File "resource://jid1-6mbf14zorstb4w-at-jetpack/covertest/lib/main.js", line 10, in
+    throw new Error("cannot find the global scope");Total time: 2.540069 seconds
+Program terminated unsuccessfully.
+
