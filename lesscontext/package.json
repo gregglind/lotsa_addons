@@ -1,0 +1,9 @@
+{
+  "name": "trim-context-menu",
+  "fullName": "Trim Context Menu",
+  "id": "trim-context-menu@ux.mozilla.com",
+  "description": "Trim items from the context menu that you don't like.",
+  "author": "Gregg Lind <glind@mozilla.com",
+  "license": "MPL 2.0",
+  "version": "1.0"
+}
