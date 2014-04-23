@@ -4,11 +4,12 @@
 
 "use strict";
 
-const { getOuterId, isBrowser } = require("window/utils");
+const {isBrowser} = require("window/utils");
 const {WindowTracker} = require("sdk/deprecated/window-utils");
-
-let myprefs = require("simple-prefs").prefs;
-require("simple-prefs").on;
+const simpleprefs = require("simple-prefs");
+const myprefs = require("simple-prefs").prefs;
+const data = require("self").data;
+const tabs = require("tabs")
 
 let Track = function(fn) WindowTracker({ onTrack: fn});
 let browserOnly = function(fn) {
@@ -28,7 +29,8 @@ function onContextMenuPrefChange(prefName) {
   contextmenutracker = applytomenus();
 }
 
-require("simple-prefs").on("contextmenuconfig", onContextMenuPrefChange);
+simpleprefs.on("contextmenuconfig", onContextMenuPrefChange);
+simpleprefs.on("launcheditor",function(){tabs.open(data.url("editor.html"))})
 
 function applytomenus(){
 	return Track(browserOnly(function(window){
@@ -51,9 +53,28 @@ function applytomenus(){
 
 let initialsetup = function(){
 	if (myprefs.contextmenuconfig === undefined) {
-		myprefs.contextmenuconfig = S({"context-back": false, "spell-add-to-dictionary": false})
+		myprefs.contextmenuconfig = S({})
+		tabs.open(data.url("editor.html"))
 	}
 };
+
+
+let editorPage = require("page-mod").PageMod({
+  include: data.url("editor.html"),
+  contentScriptFile: [data.url("jquery.js"),data.url("underscore.js"),data.url("editor.js")],
+  onAttach: function(worker) {
+  	let config = {};
+  	if (myprefs.contextmenuconfig) {
+  		config = P(myprefs.contextmenuconfig)
+  	}
+  	worker.port.emit("config",{config:config});
+    worker.port.on("updated", function(config) {
+    	console.log("GOT UPDATED CONFIG!");
+      myprefs.contextmenuconfig = S(config) // will cascade
+    });
+  }
+});
+
 
 let main = exports.main = function(options,callback){
 	initialsetup();
